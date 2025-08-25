@@ -1,83 +1,46 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>1:1 Coaching – Mindset & Psychologie</title>
-
   <style>
-    :root { --black:#111; --muted:#666; --border:#eee; }
-    *{box-sizing:border-box} body{margin:0;font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;color:var(--black)}
-    header{position:sticky;top:0;background:#fff;border-bottom:1px solid var(--border);z-index:50}
-    .wrap{max-width:980px;margin:0 auto;padding:20px}
-    .row{display:flex;gap:16px;flex-wrap:wrap}
-    .btn{background:var(--black);color:#fff;text-decoration:none;padding:12px 16px;border-radius:12px;display:inline-block}
-    .card{border:1px solid var(--border);border-radius:16px;padding:20px;box-shadow:0 2px 12px rgba(0,0,0,.04)}
-    .muted{color:var(--muted);font-size:14px}
-    h1{margin:12px 0 6px}
-    h2{margin:0 0 8px}
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 40px;
+    }
+    h1 { color: #111; }
+    .btn {
+      background: #0070ba;
+      color: white;
+      padding: 12px 20px;
+      font-size: 18px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .btn:hover { background: #005c99; }
+    input {
+      padding: 10px;
+      width: 250px;
+      margin: 10px;
+    }
   </style>
-
-  <!-- Calendly -->
-  <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
-  <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
-
-  <!-- PayPal SDK (dein Key + EUR) -->
-  <script src="https://www.paypal.com/sdk/js?client-id=ATwe__Qj24Kh9q5rxsfo7fWkzVdnxaIbA9qnnm8a4v5qNxQ5LRNQ76tLEmUeUKPcwP2CYmUD1NZnuyzf&currency=EUR&intent=capture"></script>
 </head>
 <body>
-  <header>
-    <div class="wrap row" style="justify-content:space-between;align-items:center">
-      <strong>mindset.literatur.psychologie</strong>
-      <a class="btn" href="#buchen">Jetzt buchen</a>
-    </div>
-  </header>
+  <h1>Willkommen zu deinem 1:1 Coaching</h1>
+  <p>Buche dein persönliches Gespräch & zahle sicher mit PayPal.</p>
 
-  <main class="wrap">
-    <h1>1:1 Coaching – 30 Minuten</h1>
-    <p>Kurzes, klares Gespräch per Telefon/Zoom. <b>Schritt 1:</b> PayPal zahlen. <b>Schritt 2:</b> Termin wählen.</p>
+  <h2>1. Deine E-Mail & Wunschtermin</h2>
+  <form action="mailto:DEINE_EMAIL@beispiel.de" method="post" enctype="text/plain">
+    <input type="email" name="email" placeholder="Deine E-Mail" required><br>
+    <input type="text" name="termin" placeholder="Wunschtermin" required><br>
+    <input type="submit" value="Absenden">
+  </form>
 
-    <section id="buchen" class="card" style="margin:18px 0">
-      <h2>Schritt 1 – Bezahlung</h2>
-      <p class="muted">Preis: <b>39 €</b></p>
-      <div id="paypal-button-container"></div>
-      <p id="paid-note" class="muted" style="display:none;margin-top:8px">Danke! Scrolle zum Kalender und wähle deinen Termin.</p>
-    </section>
-
-    <section class="card" style="margin:18px 0">
-      <h2>Schritt 2 – Termin wählen</h2>
-      <!-- Calendly – hier ist dein echter Link -->
-      <div class="calendly-inline-widget"
-           data-url="https://calendly.com/mindset-psychologie/30min"
-           style="min-width:320px;height:760px;"></div>
-      <p class="muted">Du erhältst automatisch eine Bestätigung per E-Mail von Calendly.</p>
-    </section>
-
-    <p class="muted">Kontakt: kontakt@mindset-psychologie.de</p>
-  </main>
-
-  <script>
-    // PayPal-Button
-    function renderPayPal(){
-      if(!window.paypal) return;
-      paypal.Buttons({
-        style:{ layout:'vertical' },
-        createOrder:(data, actions)=>actions.order.create({
-          purchase_units:[{
-            amount:{ value:'39', currency_code:'EUR' },
-            description:'1:1 Coaching – 30 Minuten'
-          }]
-        }),
-        onApprove: async (data, actions)=>{
-          await actions.order.capture();
-          document.getElementById('paid-note').style.display='block';
-          document.querySelector('.calendly-inline-widget')
-            .scrollIntoView({behavior:'smooth'});
-        }
-      }).render('#paypal-button-container');
-    }
-    if(document.readyState==='complete') renderPayPal();
-    else window.addEventListener('load', renderPayPal);
-  </script>
+  <h2>2. Jetzt bezahlen</h2>
+  <a class="btn" href="https://www.paypal.com/ncp/payment/YOUR_CLIENT_ID" target="_blank">Mit PayPal zahlen</a>
 </body>
 </html>
